@@ -73,7 +73,9 @@ const MainContainer = () => {
         <Route path="/search">
           <Search />
         </Route>
-        <Route path="/recipe-details/:id"></Route>
+        <Route path="/recipe-details/:id">
+          <RecipeDetails user={user} />
+        </Route>
       </Switch>
     </>
   );
