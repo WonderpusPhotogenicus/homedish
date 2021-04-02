@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-const HOMEDISH_URI = require('./keys');
+const HOMEDISH_URI = require('./doNotCommit');
 
 const pool = new Pool({
   connectionString: HOMEDISH_URI

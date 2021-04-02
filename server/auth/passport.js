@@ -4,7 +4,7 @@ const db = require('../models/homeModels');
 const bcrypt = require('bcrypt');
 
 passport.use(new LocalStrategy((email_address, password, done) => {
-  console.log(email_address)
+  
   db.query('SELECT user_id, email_address, password FROM Users WHERE email_address=$1;', [email_address], (err, result) => {
     if(err) {
       console.log('Error when selecting user on login', err)
@@ -12,7 +12,6 @@ passport.use(new LocalStrategy((email_address, password, done) => {
     }
 
     if(result.rows.length > 0) {
-      console.log('we made it!')
       const first = result.rows[0]
       bcrypt.compare(password, first.password, function(err, res) {
         if (res) {

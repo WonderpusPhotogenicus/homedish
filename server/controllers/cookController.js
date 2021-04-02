@@ -3,13 +3,6 @@ const db = require('../models/homeModels');
 
 const cookController = {};
 
-// CREATE TABLE Cooks (
-//   cook_id serial not null primary key,
-//   user_id int references Users(user_id),
-//   cooking_experience INTEGER,
-//   kitchen_name VARCHAR(30) NOT NULL
-// );
-
 cookController.addCook = (req, res, next) => {
   if (!res.locals.user.is_cook) return next();
 

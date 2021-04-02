@@ -26,7 +26,9 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
   const [validationMap, setValidationMap] = useState({});
   const history = useHistory();
 
-  const handleSignup = async () => {
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    
     const fields = {
       "first name": firstName,
       "last name": lastName,
@@ -95,8 +97,7 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
       data.is_cook ? history.push('/create-recipe') : history.push('/dashboard');
     })
     .catch(err => console.log(err))
-    
-    
+  
   };
 
   return (

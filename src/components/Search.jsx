@@ -25,7 +25,8 @@ const arraySample =
         meal_type: 'dinner',
         allergens: 'none',
         rating: 4,
-        price: 8
+        price: 8,
+        servings: 2 //this we would need as well
       },
       {id: 2,
         url: 'https://www.roadaffair.com/wp-content/uploads/2018/07/vegan-street-food-nyc-shutterstock_404195452-1024x683.jpg',

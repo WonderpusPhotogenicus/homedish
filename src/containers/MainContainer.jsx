@@ -5,21 +5,22 @@ import Landing from '../components/Landing.jsx';
 import RecipeCard from '../components/RecipeCard.jsx';
 import Search from '../components/Search.jsx';
 import RecipeDetails from '../components/RecipeDetails.jsx';
-
+import PrivateRoute from '../components/privateRoute';
+import PublicRoute from '../components/publicRoute';
+import HomePage from '../components/HomePage';
 
 import { Switch, Route, Link, withRouter } from "react-router-dom";
 
 const MainContainer = () => {
   const mockRecipesFromBackend = [
-    {name: 'recipe 1', id: 1},
-    {name: 'recipe 2', id: 2},
-    {name: 'recipe 3', id: 3},
+    { name: 'recipe 1', id: 1 },
+    { name: 'recipe 2', id: 2 },
+    { name: 'recipe 3', id: 3 },
   ];
 
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  console.log(user);
+  
   return (
     <>
       <div className="nav">
@@ -42,8 +43,7 @@ const MainContainer = () => {
           )}
         </div>
         {/*mockRecipesFromBackend
-//       .map((recipe) => <Link to={`/recipe-details/${recipe.id}`}>placeholder</Link>)*/}
-
+         .map((recipe) => <Link to={`/recipe-details/${recipe.id}`}>placeholder</Link>)*/}
         <div className="auth-cook-nav" style={{ display: 'none' }}>
           <Link to="/create-recipe">Create a Recipe</Link>
           {/* <Link to="/search">My Active Recipes</Link>
@@ -57,21 +57,35 @@ const MainContainer = () => {
       </div>
 
       <Switch>
-        <Route path="/home">
-          <Landing />
-        </Route>
-        <Route path="/login">
-          <Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
-        </Route>
-        <Route path="/signup">
+        <PublicRoute restricted={false} component={Landing} path="/" exact />
+        <PublicRoute restricted={true} component={Login} path="/login" exact>
+          <Login setUser={setUser} setIsLoggedIn={setIsLoggedIn}/>
+        </PublicRoute>
+        <PublicRoute restricted={true} component={Signup} path="/signup" exact>
           <Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+        </PublicRoute>
+        {/* <PrivateRoute component={Homepage} path="/home" exact /> */}
+        <PrivateRoute component={HomePage} path="/dashboard" exact/>
+        <PrivateRoute component={RecipeCard} path="/create-recipe" exact />
+        <PrivateRoute component={Search} path="/search" exact />
+        <PrivateRoute component={(props) => <RecipeDetails {...props}/>} path="/recipe-details/:id" exact />
+      </Switch>
+    </>
+  );
+}
+
+{/* 
+   Old Routes
+  <Route path="/home">
+          <Landing />
         </Route>
         <Route path="/create-recipe">
           <RecipeCard />
         </Route>
-
         <Route path="/search">
           <Search />
+          <Route path="/login">
+            <Login />
         </Route>
         <Route path="/recipe-details/:id">
           <RecipeDetails user={user} />
@@ -80,5 +94,8 @@ const MainContainer = () => {
     </>
   );
 }
+        <Route path="/signup">
+            <Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+        </Route> */}
 
 export default MainContainer;
