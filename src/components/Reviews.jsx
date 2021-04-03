@@ -3,10 +3,12 @@ import TextField from '@material-ui/core/TextField';
 
 const Reviews = ({user}) => {
   const [review, setReview] = useState("");
-  const [reviews, setReviews] = useState([{user: "LeoEats", content: "Food is yum."}])
+  const [reviews, setReviews] = useState([{user: "LeoEats", content: "Food is yum.", stars: 5}])
+  const [stars, setStars] = useState(0);
+  // const [stars, setStars] = useState('☆☆☆☆☆');
 
   const addReview = () => {
-    setReviews(reviews.concat({user: user && user.name || "Anonymous Eater", content: review}));
+    setReviews(reviews.concat({user: user && user.name || "Anonymous Eater", content: review, stars}));
     setReview("");
   };
   return (
@@ -20,6 +22,13 @@ const Reviews = ({user}) => {
           variant="outlined"
           style={{width: "75%"}}
         />
+        {[1,2,3,4,5].map((num) => {
+          return (
+            <span onClick={() => setStars(num)}>
+              {num <= stars ? '⭐' : '☆'}
+            </span>
+          );
+        })}
         <button className="sign-up-button" onClick={addReview}>
           Add Review
         </button>
@@ -28,11 +37,14 @@ const Reviews = ({user}) => {
         return (
           <div>
             {review.user}: {review.content}
+            {'⭐'.repeat(review.stars)}
           </div>
         );
       })}
     </>
   );
 };
+
+
 
 export default Reviews;
