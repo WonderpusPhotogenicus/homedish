@@ -18,7 +18,7 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
-  const [allergies, setAllergies] = useState("");
+  const [allergies, setAllergies] = useState("None");
   const [profilePicture, setProfilePicture] = useState(null);
   const [kitchenName, setKitchenName] = useState("");
   const [experience, setExperience] = useState("");
@@ -262,6 +262,7 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
             onChange={(e) => setAllergies(e.target.value)}
             style={{ width: '200px' }}
           >
+            <MenuItem value={'None'}>None</MenuItem>
             <MenuItem value={'Eggs'}>Eggs</MenuItem>
             <MenuItem value={'Nuts'}>Nuts</MenuItem>
             <MenuItem value={'Dairy'}>Dairy</MenuItem>
