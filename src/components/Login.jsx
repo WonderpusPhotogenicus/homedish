@@ -35,9 +35,10 @@ const Login = ({ setUser, setIsLoggedIn }) => {
         login(data.token)
         setUser(data);
         setIsLoggedIn(true);
+        localStorage.setItem('user_id', data.user_id);
         data.is_cook
           ? history.push("/create-recipe")
-          : history.push("/dashboard");
+          : history.push("/search");
       })
       .catch((err) => {
         console.log(err);
@@ -45,8 +46,9 @@ const Login = ({ setUser, setIsLoggedIn }) => {
   };
 
   return (
-    <>
+    <div className="formLogin">
       <form>
+        <div className = "subtitle">Log into with your HomeDish account</div>
         <p>
           <TextField
             label="Email"
@@ -73,7 +75,7 @@ const Login = ({ setUser, setIsLoggedIn }) => {
           Log In
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

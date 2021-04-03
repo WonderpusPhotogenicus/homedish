@@ -85,8 +85,9 @@ const RecipeCard = () => {
   };
 
   return (
-    <>
+    <div className="formDiv">
       <form>
+        <div className="subtitle">Create and serve a new recipe</div>
         <p>
           <TextField
             id="title"
@@ -150,8 +151,9 @@ const RecipeCard = () => {
               </MenuItem>
               <MenuItem value="Dairy">Dairy</MenuItem>
               <MenuItem value="Eggs">Eggs</MenuItem>
-              <MenuItem value="Nuts">Nuts</MenuItem>
               <MenuItem value="Fish">Fish</MenuItem>
+              <MenuItem value="Nuts">Nuts</MenuItem>
+              <MenuItem value="Shellfish">Shellfish</MenuItem>
               <MenuItem value="Wheat">Wheat</MenuItem>
               <MenuItem value="Soy">Soy</MenuItem>
             </Select>
@@ -171,9 +173,17 @@ const RecipeCard = () => {
               helperText={validationMap.diets}
               variant="outlined"
             >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="Gluten-Free">Gluten-Free</MenuItem>
+              <MenuItem value="Halal">Halal</MenuItem>
+              <MenuItem value="Keto">Keto</MenuItem>
+              <MenuItem value="Kosher">Kosher</MenuItem>
+              <MenuItem value="Low-Carb">Low-Carb</MenuItem>
+              <MenuItem value="Paleo">Paleo</MenuItem>
               <MenuItem value="Vegetarian">Vegetarian</MenuItem>
               <MenuItem value="Vegan">Vegan</MenuItem>
-              <MenuItem value="Gluten-Free">Gluten-Free</MenuItem>
             </Select>
           </FormControl>
         </p>
@@ -212,11 +222,11 @@ const RecipeCard = () => {
             variant="outlined"
           />
         </p>
-        <Button color="primary" onClick={handleNewRecipe}>
+        <button className="sign-up-button" onClick={handleNewRecipe}>
           Create
-        </Button>
+        </button>
       </form>
-    </>
+    </div>
   );
 };
 
