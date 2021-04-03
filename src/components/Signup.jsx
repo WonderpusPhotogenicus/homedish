@@ -256,12 +256,14 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
             onChange={(e) => setAllergies(e.target.value)}
             style={{ width: '200px' }}
           >
-            <MenuItem value={'Nuts'}>Lactose Intolerant</MenuItem>
-            <MenuItem value={'Shellfish'}>Peanuts</MenuItem>
-            <MenuItem value={'Dairy'}>TreeNuts</MenuItem>
-            <MenuItem value={'Nuts'}>Shellfish</MenuItem>
-            <MenuItem value={'Shellfish'}>Soy</MenuItem>
-            <MenuItem value={'Dairy'}>Wheat</MenuItem>
+            <MenuItem value={'Eggs'}>Eggs</MenuItem>
+            <MenuItem value={'Nuts'}>Nuts</MenuItem>
+            <MenuItem value={'Dairy'}>Dairy</MenuItem>
+            <MenuItem value={'Shellfish'}>Shellfish</MenuItem>
+            <MenuItem value={'Fish'}>Fish</MenuItem>
+            <MenuItem value={'Soy'}>Soy</MenuItem>
+            <MenuItem value={'Dairy'}>Dairy</MenuItem>
+            <MenuItem value={'Wheat'}>Wheat</MenuItem>
           </Select>
         </p>
         {is_cook === 'true' && (
