@@ -17,55 +17,6 @@ import Chip from '@material-ui/core/Chip';
 
 // fake sample data
 
-const arraySample = 
-    [ {id: 1,
-        url: 'https://www.roadaffair.com/wp-content/uploads/2018/07/vegan-street-food-nyc-shutterstock_404195452-1024x683.jpg',
-        name: 'Squash Soup',
-        cook_name: 'Sandra Song',
-        meal_type: 'dinner',
-        allergens: 'none',
-        rating: 4,
-        price: 8,
-        servings: 2 //this we would need as well
-      },
-      {id: 2,
-        url: 'https://www.roadaffair.com/wp-content/uploads/2018/07/vegan-street-food-nyc-shutterstock_404195452-1024x683.jpg',
-        name: 'Squash Soup2',
-        cook_name: 'Sandra Song',
-        meal_type: 'dinner',
-        allergens: 'none',
-        rating: 4,
-        price: 8
-      },
-      {id: 3,
-        url: 'https://www.roadaffair.com/wp-content/uploads/2018/07/vegan-street-food-nyc-shutterstock_404195452-1024x683.jpg',
-        name: 'Squash Soup3',
-        cook_name: 'Sandra Song',
-        meal_type: 'dinner',
-        allergens: 'none',
-        rating: 4,
-        price: 8
-      },
-      {id: 4,
-        url: 'https://www.roadaffair.com/wp-content/uploads/2018/07/vegan-street-food-nyc-shutterstock_404195452-1024x683.jpg',
-        name: 'Squash Soup4',
-        cook_name: 'Sandra Song',
-        meal_type: 'dinner',
-        allergens: 'none',
-        rating: 4,
-        price: 8
-      },
-      {id: 5,
-        url: 'https://www.roadaffair.com/wp-content/uploads/2018/07/vegan-street-food-nyc-shutterstock_404195452-1024x683.jpg',
-        name: 'Squash Soup5',
-        cook_name: 'Sandra Song',
-        meal_type: 'dinner',
-        allergens: 'none',
-        rating: 4,
-        price: 8
-      },
-    ];
-
 const mealType = [
     'Breakfast',
     'Lunch',
@@ -107,6 +58,21 @@ const Search = () => {
     const [recipes, setRecipes] = useState([]);
     const [filter, setFilters] = useState([]);
 
+    // const loadAllRecipes = () => {
+    //   fetch('/api/getAllRecipes')
+    //   .then(res => {
+    //       if (res.ok) {
+    //       return res.json();
+    //       }else {
+    //       throw "did not successfully search recipe"
+    //       }
+    //   })
+    //   .then(data => {
+    //     setRecipes(data);
+    //   })
+    //   .catch(err => console.log(err))
+    // };
+
     const handleSearchZip = async () => {
       const zip = document.getElementsByName("search-city-field")[0].value;
 
@@ -127,10 +93,6 @@ const Search = () => {
 
       console.log('recipes2: ', recipes);
 
-    // useEffect(() => {
-    //   document.title = `You clicked ${count} times`;
-    // });
-
     return (
         <div className="search">
             <div className="subtitle">
@@ -143,7 +105,7 @@ const Search = () => {
                 <div>
                 <InputBase
                     name="search-city-field"
-                    placeholder="Search your zip code" 
+                    placeholder="Search by city or zip" 
                     inputProps={{ 'aria-label': 'search' }}
                 />
                 </div>
@@ -159,13 +121,13 @@ const Search = () => {
             <div className="results">
                 {recipes.map((el) => {
                     return (
-                        <Result 
+                        <Result  // TODO: limit to width
                             key={el.recipe_id}
                             recipeUrl={el.image_url}
                             recipeName={el.title}
-                            recipeCook={el.cook_id}
+                            recipeCook={el.kitchen_name} // TODO: move to next line
                             recipeMealType={el.meal_type}
-                            allergens={el.allergens}
+                            allergens={el.allergens === 'None' ? '' : el.allergens} // TODO: remove if none
                             rating={el.rating}
                             recipePrice={el.price} />
                     )
@@ -342,13 +304,16 @@ const Result = ( { key, recipeUrl, recipeName, recipeCook, recipeMealType, aller
             <img src={recipeUrl} />
 
             <div className="result-name">
-                <b>{recipeName}</b> by {recipeCook}
+                <b>{recipeName}</b>
+            </div>
+
+            <div className="result-cook">
+              by {recipeCook}
             </div>
 
             <div className="result-details">
                 {recipeMealType} 
                 <div className="allergens"> 
-                    {/* /* this should loop */}
                     {allergens}
                 </div>
                 <div>

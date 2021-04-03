@@ -120,7 +120,7 @@ a {
 .result {
     margin-top: 40px;
     margin-left: 60px;
-    /* width: 300px; */
+    width: 300px;
     /* flex: 0 0 25%;  */
 }
 
@@ -132,6 +132,10 @@ a {
 
 .result-name {
     font-size: 20px;
+}
+
+.result-cook {
+    font-style: italic;
 }
 
 .result-details {
@@ -157,11 +161,32 @@ a {
 
 /***** login/signup *****/
 .log-in-button, .sign-up-button {
-    font-size: 24px;
+    font-size: 20px;
     color: white;
     border: none;
-    background-color: #4F9A46;
-    margin-left: 30px;
-    padding: 2px 15px 2px 15px;
-    border-radius: 20px;
+    background-image: linear-gradient(to right, #4F9A46 , #2d7926);
+    padding: 8px 15px 8px 15px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.formLogin, .formDiv {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+form {
+    text-align: center;
+    border: 0.5px solid #ababab;
+    border-radius: 10px;
+    padding: 50px;
+    margin: 50px;
+    width: 500px;
+    background-color: #f7f7f7;
+}
+
+.MuiFormControl-root {
+    width: 300px;
+    background-color: white;
 }
