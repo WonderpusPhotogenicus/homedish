@@ -13,7 +13,7 @@ cookController.addCook = (req, res, next) => {
   
   const { user_id } = res.locals.user;
   
-  const text = `INSERT INTO Cooks(user_id, cooking_experience, kitchen_name) VALUES($1, $2, $3) RETURNING cooking_experience, kitchen_name;`;
+  const text = `INSERT INTO Cooks(user_id, cooking_experience, kitchen_name) VALUES($1, $2, $3) RETURNING cook_id, cooking_experience, kitchen_name;`;
   const vals = [`${user_id}`, `${cookData.cooking_experience}`, `${cookData.kitchen_name}`];
   
   db
@@ -31,7 +31,7 @@ cookController.addCook = (req, res, next) => {
 }
 
 cookController.getCook = (req, res, next) => {
-  const { user_id } = req.body;
+  const { user_id } = req.query;
 
   const text = `SELECT * FROM Cooks WHERE user_id = $1`;
   const val = [`${user_id}`];

@@ -52,7 +52,14 @@ router.get('/getCooksRecipes',
   (req, res) => {
     res.status(200).send(res.locals.cooks)
   }
-)
+);
+
+router.get('/getCook',
+  cookController.getCook,
+  (req, res) => {
+    res.status(200).send(res.locals.cook)
+  }
+);
 
 router.get('/getAllRecipesByCook', 
   recipeController.getAllRecipesByCook,
