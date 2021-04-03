@@ -50,18 +50,14 @@ cookController.getCook = (req, res, next) => {
 
 }
 
-cookController.getCooksByZip = (req, res, next) => {
+cookController.getCooksRecipes = (req, res, next) => {
   // works with state or zip
   const { address } = req.query;
   const text = `SELECT * FROM 
-                Recipes WHERE
-                cook_id IN (SELECT cook_id
-                            FROM cooks
-                            WHERE user_id IN (SELECT user_id
-                                              FROM users
-                                              WHERE address LIKE ('%' || $1 || '%') AND is_cook = true
-                                              )
-                            )`;
+                Recipes JOIN
+                cooks ON recipes.cook_id = cooks.cook_id JOIN
+                Users ON cooks.user_id = users.user_id WHERE
+                      users.address LIKE ('%' || $1 || '%')`
   const val = [`${address}`]
 
   db  

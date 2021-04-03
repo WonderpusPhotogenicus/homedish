@@ -8,6 +8,8 @@ const User = require('../auth/user.js');
 const passport = require('passport');
 require('../auth/passport');
 
+
+// auth routes
 router.post('/signup',
   User.signup,
   userController.createUser,
@@ -24,27 +26,11 @@ router.post('/login',
     res.status(200).send(res.locals.user)
   )
 );
-
+// user controller routes
 router.post('/updateUser',
   userController.getUserId,
   userController.updateUser
 );
-
-router.post('/addRecipe',
-  recipeController.addRecipe,
-  (req, res) => (
-    res.status(201).send(res.locals.recipe)
-  )
-);
-
-router.get('/getAllRecipes', 
-  recipeController.getAllRecipes,
-  (req, res) => (
-    res.status(200).send(res.locals.recipe)
-  )
-)
-
-// router.post('/editRecipe')
 
 router.get('/getUser',
   userController.getUser,
@@ -60,13 +46,40 @@ router.delete('/deleteUser',
     res.status(200)
   }
 );
-
+// recipe controller routes
 router.get('/getCooksRecipes',
-  cookController.getCooksByZip,
+  cookController.getCooksRecipes,
   (req, res) => {
     res.status(200).send(res.locals.cooks)
   }
 )
 
+router.get('/getAllRecipesByCook', 
+  recipeController.getAllRecipesByCook,
+  (req, res) => (
+    res.status(200).send(res.locals.recipes)
+  )
+)
 
+router.get('/getAllRecipes', 
+  recipeController.getAllRecipes,
+  (req, res) => (
+    res.status(200).send(res.locals.recipes)
+  )
+);
+
+router.post('/updateRecipe',
+  recipeController.updateRecipe,
+  (req, res) => (
+    res.status(200).json(res.locals.recipes)
+  )
+);
+
+router.post('/addRecipe',
+  recipeController.addRecipe,
+  (req, res) => (
+    res.status(201).send(res.locals.recipe)
+  )
+);
+// cook controller routes
 module.exports = router;

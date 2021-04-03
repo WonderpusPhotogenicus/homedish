@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
@@ -29,6 +30,7 @@ const RecipeCard = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [validationMap, setValidationMap] = useState({});
+  const history = useHistory();
 
   const handleNewRecipe = async () => {
     const fields = {

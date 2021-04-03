@@ -104,11 +104,32 @@ const preferences = [
     ];
 
 const Search = () => {
-    // const [arraySample, updateSample] = useState(arraySample);
+    const [recipes, setRecipes] = useState([]);
+    const [filter, setFilters] = useState([]);
 
-    function searchCity() {
-        return console.log(document.getElementsByName("search-city-field")[0].value);
-    }
+    const handleSearchZip = async () => {
+      const zip = document.getElementsByName("search-city-field")[0].value;
+
+      fetch(`/api/getCooksRecipes?address=${zip}`)
+      .then(res => {
+          if (res.ok) {
+          return res.json();
+          }else {
+          throw "did not successfully search recipe"
+          }
+      })
+      .then(data => {
+        setRecipes(data);
+          // history.push('/search');
+      })
+      .catch(err => console.log(err))
+      }
+
+      console.log('recipes2: ', recipes);
+
+    // useEffect(() => {
+    //   document.title = `You clicked ${count} times`;
+    // });
 
     return (
         <div className="search">
@@ -127,7 +148,7 @@ const Search = () => {
                 />
                 </div>
                 <div>
-                    <ArrowForwardIcon onClick={() => { searchCity(); }} />
+                    <ArrowForwardIcon onClick={() => { handleSearchZip(); }} />
                 </div>
             </div>
 
@@ -136,13 +157,13 @@ const Search = () => {
             </div>
 
             <div className="results">
-                {arraySample.map((el) => {
+                {recipes.map((el) => {
                     return (
                         <Result 
-                            key={el.id}
-                            recipeUrl={el.url}
-                            recipeName={el.name}
-                            recipeCook={el.cook_name}
+                            key={el.recipe_id}
+                            recipeUrl={el.image_url}
+                            recipeName={el.title}
+                            recipeCook={el.cook_id}
                             recipeMealType={el.meal_type}
                             allergens={el.allergens}
                             rating={el.rating}
