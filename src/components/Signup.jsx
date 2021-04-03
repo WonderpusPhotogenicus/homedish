@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import TextField from "@material-ui/core/TextField";
 import Input from "@material-ui/core/Input";
@@ -95,6 +95,7 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
       setUser(data);
       setIsLoggedIn(true);
       localStorage.setItem('user_id', data.user_id);
+      localStorage.setItem('cook_id', data.cookInfo.cook_id)
       data.is_cook ? history.push('/create-recipe') : history.push('/search');
     })
     .catch(err => console.log(err))

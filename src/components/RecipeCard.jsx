@@ -30,9 +30,11 @@ const RecipeCard = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [validationMap, setValidationMap] = useState({});
+  const [cookId, setCookId] = useState(localStorage.getItem('cook_id'));
   const history = useHistory();
 
-  const handleNewRecipe = async () => {
+  const handleNewRecipe = async (e) => {
+    e.preventDefault();
     const fields = {
       title: title,
       meal_type: meal_type,
@@ -43,7 +45,7 @@ const RecipeCard = () => {
       price: price,
       description: description,
       image_url: "https://bigseventravel.com/wp-content/uploads/2020/01/hard-times-sundae-nyc.jpg", // TODO: this is hard-coded
-      cook_id: 9 // TODO: this is hard-coded
+      cook_id: cookId // TODO: this is hard-coded
     };
 
     console.log(fields);
@@ -70,9 +72,9 @@ const RecipeCard = () => {
     })
     .then(res => {
         if (res.ok) {
-        return res.json();
-        }else {
-        throw "recipe not created"
+          return res.json();
+        } else {
+          throw "recipe not created"
         }
     })
     .then(data => {

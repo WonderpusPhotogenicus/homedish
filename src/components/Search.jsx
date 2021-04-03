@@ -343,14 +343,6 @@ const Result = ( { key, recipe }) => {
                     {starRating}
                 </div>
             </div>
-        <div className="result-details">
-          {recipeMealType}
-          <div className="allergens">
-            {/* /* this should loop */}
-            {allergens}
-          </div>
-          <div>{starRating}</div>
-        </div>
 
         <div className="result-price">{recipePrice} Tokens</div>
       </div>
