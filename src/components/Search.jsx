@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -161,13 +162,7 @@ const Search = () => {
                     return (
                         <Result 
                             key={el.recipe_id}
-                            recipeUrl={el.image_url}
-                            recipeName={el.title}
-                            recipeCook={el.cook_id}
-                            recipeMealType={el.meal_type}
-                            allergens={el.allergens}
-                            rating={el.rating}
-                            recipePrice={el.price} />
+                            recipe={el} />
                     )
                 })}
             </div>
@@ -326,7 +321,25 @@ const MultipleSelect = () => {
     );
   }
 
-const Result = ( { key, recipeUrl, recipeName, recipeCook, recipeMealType, allergens, rating, recipePrice }) => {
+const Result = ( { key, recipe }) => {
+    const history = useHistory();
+                            //     recipeUrl={el.image_url}
+                            // recipeName={el.title}
+                            // recipeCook={el.cook_id}
+                            // recipeMealType={el.meal_type}
+                            // allergens={el.allergens}
+                            // rating={el.rating}
+                            // recipePrice={el.price}
+    const {
+      image_url: recipeUrl,
+      title: recipeName,
+      kitchen_name: recipeCook,
+      meal_type: recipeMealType,
+      allergens: allergens,
+      rating: rating,
+      price: recipePrice,
+      recipe_id: recipeId
+    } = recipe;
     const starRating = [];
 
     for (let i = 0; i < 5; i++) {
@@ -338,29 +351,29 @@ const Result = ( { key, recipeUrl, recipeName, recipeCook, recipeMealType, aller
     }
 
     return (
-        <div className="result" key={key}>
-            <img src={recipeUrl} />
+      <div
+        onClick={() => history.push(`/recipe-details/${recipeId}`, { recipe })}
+        className="result"
+        key={key}
+      >
+        <img src={recipeUrl} />
 
-            <div className="result-name">
-                <b>{recipeName}</b> by {recipeCook}
-            </div>
-
-            <div className="result-details">
-                {recipeMealType} 
-                <div className="allergens"> 
-                    {/* /* this should loop */}
-                    {allergens}
-                </div>
-                <div>
-                    {starRating}
-                </div>
-            </div>
-
-            <div className="result-price">
-                {recipePrice} Tokens
-            </div>
+        <div className="result-name">
+          <b>{recipeName}</b> by {recipeCook}
         </div>
-  );
+
+        <div className="result-details">
+          {recipeMealType}
+          <div className="allergens">
+            {/* /* this should loop */}
+            {allergens}
+          </div>
+          <div>{starRating}</div>
+        </div>
+
+        <div className="result-price">{recipePrice} Tokens</div>
+      </div>
+    );
 }
 
 export default Search;

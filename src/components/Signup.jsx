@@ -94,7 +94,7 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
       // can change redirect route later
       setUser(data);
       setIsLoggedIn(true);
-      data.is_cook ? history.push('/create-recipe') : history.push('/dashboard');
+      data.is_cook ? history.push('/create-recipe') : history.push('/search');
     })
     .catch(err => console.log(err))
   

@@ -6,7 +6,7 @@ const Reviews = ({user}) => {
   const [reviews, setReviews] = useState([{user: "LeoEats", content: "Food is yum."}])
 
   const addReview = () => {
-    setReviews(reviews.concat({user: user.name || "Anonymous Eater", content: review}));
+    setReviews(reviews.concat({user: user && user.name || "Anonymous Eater", content: review}));
     setReview("");
   };
   return (

@@ -37,7 +37,7 @@ const Login = ({ setUser, setIsLoggedIn }) => {
         setIsLoggedIn(true);
         data.is_cook
           ? history.push("/create-recipe")
-          : history.push("/dashboard");
+          : history.push("/search");
       })
       .catch((err) => {
         console.log(err);
