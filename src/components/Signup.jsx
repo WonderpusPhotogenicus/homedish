@@ -94,17 +94,23 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
       // can change redirect route later
       setUser(data);
       setIsLoggedIn(true);
-      data.is_cook ? history.push('/create-recipe') : history.push('/dashboard');
+      localStorage.setItem('user_id', data.user_id);
+      data.is_cook ? history.push('/create-recipe') : history.push('/search');
     })
     .catch(err => console.log(err))
   
   };
 
   return (
-    <>
+    <div className="formDiv">
+      <div>
       <Button onClick={() => setUserType('false')}>Eat</Button>
       <Button onClick={() => setUserType('true')}>Cook</Button>
+        </div>
       <form>
+        <div className="subtitle">
+        Sign up for a new account and join the community
+          </div>
         <p>
           <TextField
             type="text"
@@ -116,10 +122,10 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
             error={!!validationMap['first name']}
             helperText={validationMap['first name']}
             variant="outlined"
-            style={{ marginRight: '10px' }}
+            // style={{ marginRight: '10px' }}
           />
-          {/* </p>
-        <p> */}
+          </p>
+        <p>
           <TextField
             label="Last Name"
             type="text"
@@ -196,7 +202,7 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
             error={!!validationMap['street']}
             helperText={validationMap['street']}
             variant="outlined"
-            style={{ width: '500px' }}
+            // style={{ width: '500px' }}
           />
         </p>
         <p>
@@ -325,7 +331,7 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
           Sign Up
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
