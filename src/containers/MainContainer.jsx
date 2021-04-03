@@ -25,7 +25,7 @@ const MainContainer = () => {
     <>
       <div className="nav">
         <div>
-          <Link to="/home">
+          <Link to="/">
             <h2>HomeDish</h2>
           </Link>
         </div>
@@ -87,13 +87,6 @@ const MainContainer = () => {
           <Route path="/login">
             <Login />
         </Route>
-        <Route path="/recipe-details/:id">
-          <RecipeDetails user={user} />
-        </Route>
-      </Switch>
-    </>
-  );
-}
         <Route path="/signup">
             <Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
         </Route> */}
