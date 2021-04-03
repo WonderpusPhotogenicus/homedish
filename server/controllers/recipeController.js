@@ -44,7 +44,7 @@ recipeController.getAllRecipesByCook = (req, res, next) => {
 }
 
 recipeController.getAllRecipes = (req, res, next) => {
-  const text = `SELECT * from Recipes`;
+  const text = `select * from recipes JOIN cooks ON recipes.cook_id = cooks.cook_id;`;
 
   db
     .query(text)

@@ -48,7 +48,7 @@ router.delete('/deleteUser',
 );
 // recipe controller routes
 router.get('/getCooksRecipes',
-  cookController.getCooksByZip,
+  cookController.getCooksRecipes,
   (req, res) => {
     res.status(200).send(res.locals.cooks)
   }
@@ -82,12 +82,4 @@ router.post('/addRecipe',
   )
 );
 // cook controller routes
-
-
-
-
-
-
-
-
 module.exports = router;
