@@ -41,7 +41,7 @@ const RecipeCard = () => {
       price: price,
       description: description,
       image_url: "https://bigseventravel.com/wp-content/uploads/2020/01/hard-times-sundae-nyc.jpg", // TODO: this is hard-coded
-      cook_id: 1 // TODO: this is hard-coded
+      cook_id: 9 // TODO: this is hard-coded
     };
 
     console.log(fields);
@@ -74,6 +74,7 @@ const RecipeCard = () => {
         }
     })
     .then(data => {
+        console.log(data)
         history.push('/search');
     })
     .catch(err => console.log(err))

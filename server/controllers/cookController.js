@@ -7,7 +7,7 @@ cookController.addCook = (req, res, next) => {
   if (!res.locals.user.is_cook) return next();
 
   const cookData = {
-    cooking_experience: parseInt(req.body.cooking_experience),
+    cooking_experience: req.body.cooking_experience,
     kitchen_name: req.body.kitchen_name
   };
   
@@ -44,6 +44,34 @@ cookController.getCook = (req, res, next) => {
     .catch(e => {next({
       log: `cookController.getCook: ${e}`,
       message: { err: 'cookController.getCook: ERROR: Check server logs for details' }
+    })
+    }
+    ).then(() => next());
+
+}
+
+cookController.getCooksByZip = (req, res, next) => {
+  // works with state or zip
+  const { address } = req.query;
+  const text = `SELECT * FROM 
+                Recipes WHERE
+                cook_id IN (SELECT cook_id
+                            FROM cooks
+                            WHERE user_id IN (SELECT user_id
+                                              FROM users
+                                              WHERE address LIKE ('%' || $1 || '%') AND is_cook = true
+                                              )
+                            )`;
+  const val = [`${address}`]
+
+  db  
+    .query(text, val)
+    .then(data => {
+      res.locals.cooks = data.rows;
+    })
+    .catch(e => {next({
+      log: `cookController.getCookByZip: ${e}`,
+      message: { err: 'cookController.getCookByZip: ERROR: Check server logs for details' }
     })
     }
     ).then(() => next());
