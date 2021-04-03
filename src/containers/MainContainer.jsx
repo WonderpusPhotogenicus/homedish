@@ -68,7 +68,7 @@ const MainContainer = () => {
         <PrivateRoute component={HomePage} path="/dashboard" exact/>
         <PrivateRoute component={RecipeCard} path="/create-recipe" exact />
         <PrivateRoute component={Search} path="/search" exact />
-        <PrivateRoute component={HomePage} path="/recipe-details/:id" exact />
+        <PrivateRoute component={(props) => <RecipeDetails {...props}/>} path="/recipe-details/:id" exact />
       </Switch>
     </>
   );
@@ -87,6 +87,13 @@ const MainContainer = () => {
           <Route path="/login">
             <Login />
         </Route>
+        <Route path="/recipe-details/:id">
+          <RecipeDetails user={user} />
+        </Route>
+      </Switch>
+    </>
+  );
+}
         <Route path="/signup">
             <Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
         </Route> */}

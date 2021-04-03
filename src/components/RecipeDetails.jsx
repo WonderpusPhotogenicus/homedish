@@ -4,29 +4,41 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import Reviews from "./Reviews";
 
 import { useParams } from "react-router-dom";
 
-const RecipeDetails = () => {
+const RecipeDetails = ({user}) => {
   const { id } = useParams();
-  const [recipeDetails, setRecipeDetails] = useState({});
+  const [recipeDetails, setRecipeDetails] = useState({
+    id,
+    name: "Best Dish Ever",
+    price: '3',
+    ratings: '4',
+    mealType: 'Dinner',
+    ingredients: 'crackers and cucumbers',
+    allergens: 'nuts',
+    description: 'Signature dish featuring cheez its and pickles',
+    countryOfOrigin: 'Leoland',
+    servingsLeft: '3',
+  });
 
-  useEffect(async () => { 
-    const recipe = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
-    const recipeJSON = await recipe.json();
-    setRecipeDetails({
-      id,
-      name: recipeJSON.title,
-      price: "3",
-      ratings: "4",
-      mealType: "Dinner",
-      ingredients: "crackers and cucumbers",
-      allergens: "nuts",
-      description: "Signature dish featuring cheez its and pickles",
-      countryOfOrigin: "Leoland",
-      servingsLeft: "3",
-    });
-  }, [id])
+  // useEffect(async () => { 
+  //   const recipe = await fetch(``);
+  //   const recipeJSON = await recipe.json();
+  //   setRecipeDetails({
+  //     id,
+  //     name: recipeJSON.title,
+  //     price: "3",
+  //     ratings: "4",
+  //     mealType: "Dinner",
+  //     ingredients: "crackers and cucumbers",
+  //     allergens: "nuts",
+  //     description: "Signature dish featuring cheez its and pickles",
+  //     countryOfOrigin: "Leoland",
+  //     servingsLeft: "3",
+  //   });
+  // }, [id])
 
   const handleOrder = async () => {
     const order = await fetch(`someOrderAPI`);
@@ -84,6 +96,7 @@ const RecipeDetails = () => {
       <Button onClick={handleOrder} variant="contained" color="secondary">
         Order Now
       </Button>
+      <Reviews user={user}/>
     </div>
   );
 }
