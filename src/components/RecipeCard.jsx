@@ -33,8 +33,8 @@ const RecipeCard = () => {
   const [cookId, setCookId] = useState(localStorage.getItem('cook_id'));
   const history = useHistory();
 
-  const handleNewRecipe = async () => {
-
+  const handleNewRecipe = async (e) => {
+    e.preventDefault();
     const fields = {
       title: title,
       meal_type: meal_type,

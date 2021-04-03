@@ -13,6 +13,7 @@ recipeController.addRecipe = (req, res, next) => {
     .query(text, vals)
     .then(data => {
       res.locals.recipe = data.rows
+      console.log(res.locals.recipe)
     })
     .catch(e => {next({
       log: `recipeController.addRecipe: ${e}`,

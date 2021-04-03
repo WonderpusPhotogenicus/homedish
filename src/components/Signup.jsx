@@ -94,14 +94,9 @@ const Signup = ({ setUser, setIsLoggedIn }) => {
       // can change redirect route later
       setUser(data);
       setIsLoggedIn(true);
-<<<<<<< HEAD
-      localStorage.setItem('user_id', data.user_id)
-      localStorage.setItem('cook_id', data.cookInfo.cook_id)
-      data.is_cook ? history.push('/create-recipe') : history.push('/dashboard');
-=======
       localStorage.setItem('user_id', data.user_id);
+      localStorage.setItem('cook_id', data.cookInfo.cook_id)
       data.is_cook ? history.push('/create-recipe') : history.push('/search');
->>>>>>> f1614324f583a3b8e7311f0922df03f98f9cf0cf
     })
     .catch(err => console.log(err))
   
